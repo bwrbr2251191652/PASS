@@ -21,7 +21,6 @@ function generate(){
 	};
 };
 generate();
-console.log(bPass);
 
 // включение и выключение нажатой лампочки
 function click(clicked){
@@ -80,7 +79,6 @@ function checkFunc(){
 			generate()
 		};
 		pPass = [0,0,0,0];
-		console.log(bPass);
 		headr.style.color = "";
 		check.style.borderColor = "";
 		check.style.color = "";
