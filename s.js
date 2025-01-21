@@ -3,6 +3,10 @@ let light = document.querySelectorAll(".light"); // лампочки
 let check = document.getElementById("check"); // кнопка проверки
 let bPass = [0,0,0,0]; // заданный пароль
 let pPass = [0,0,0,0]; // введённый пароль
+let onSound = new Audio("on.wav");
+let offSound = new Audio("off.wav");
+let incorrectSound = new Audio("incorrect.wav");
+let correctSound = new Audio("correct.wav");
 let guess = false; // нужно, чтобы при повторном нажатии на кнопку проверки, выключались лампочки и т. п.
 
 // прослушивание нажатия на лампочки и кнопку проверки
@@ -26,11 +30,13 @@ generate();
 function click(clicked){
 	if(guess === false){
 		if(pPass[clicked.target.id] === 0){
+			onSound.play();
 			pPass[clicked.target.id] = 1;
 			clicked.target.style.backgroundColor = "#0000ff";
 			clicked.target.style.boxShadow = "0 0 16px 0 rgba(0, 0, 255, 0.5)";
 		}
 		else if(pPass[clicked.target.id] === 1){
+			offSound.play();
 			pPass[clicked.target.id] = 0;
 			clicked.target.style.backgroundColor = "";
 			clicked.target.style.boxShadow = "";
@@ -43,6 +49,7 @@ function checkFunc(){
 	if(guess === false){
 		guess = true;
 		if(bPass.toString() === pPass.toString()){
+			correctSound.play();
 			document.getElementById("check").innerHTML = "| NEXT> |";
 			headr.style.color = "#00ff00";
 			check.style.borderColor = "#00ff00";
@@ -56,6 +63,7 @@ function checkFunc(){
 			}
 		}
 		else{
+			incorrectSound.play();
 			document.getElementById("check").innerHTML = "| AGAIN |";
 			headr.style.color = "#ff0000";
 			check.style.borderColor = "#ff0000";
