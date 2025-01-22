@@ -12,6 +12,8 @@ let guess = false; // нужно, чтобы при повторном нажа�
 // прослушивание нажатия на лампочки и кнопку проверки
 light.forEach(clicked => {clicked.addEventListener("click",click)});
 check.addEventListener("click",checkFunc);
+window.addEventListener("keydown",keydown);
+window.addEventListener("keydown",checkFunc);
 
 // генерация рандомного числа в заданном диапазоне
 function random(min, max){
@@ -45,7 +47,12 @@ function click(clicked){
 };
 
 // проверка угадывания
-function checkFunc(){
+function checkFunc(event){
+	if(event.type === "keydown"){
+		if(event.code !== "Enter"){
+			return;
+		};
+	}
 	if(guess === false){
 		guess = true;
 		if(bPass.toString() === pPass.toString()){
@@ -79,7 +86,7 @@ function checkFunc(){
 	}
 	else if(guess === true){
 		guess = false;
-		document.getElementById("check").innerHTML = "| CHECK |";
+		document.getElementById("check").innerHTML = "| ENTER |";
 		headr.style.color = "#00ff00";
 		check.style.borderColor = "#00ff00";
 		check.style.color = "#00ff00";
@@ -92,5 +99,65 @@ function checkFunc(){
 		check.style.color = "";
 		light.forEach(clicked => clicked.style.backgroundColor = "");
 		light.forEach(clicked => clicked.style.boxShadow = "");
+	};
+};
+function keydown(event){
+	if(guess === false){
+		if(event.code === "Digit1"){
+			if(pPass[0] === 0){
+				onSound.play();
+				pPass[0] = 1;
+				document.getElementById("0").style.backgroundColor = "#0000ff";
+				document.getElementById("0").style.boxShadow = "0 0 16px 0 rgba(0, 0, 255, 0.5)";
+			}
+			else if(pPass[0] === 1){
+				offSound.play();
+				pPass[0] = 0;
+				document.getElementById("0").style.backgroundColor = "";
+				document.getElementById("0").style.boxShadow = "";
+			};
+		}
+		else if(event.code === "Digit2"){
+			if(pPass[1] === 0){
+				onSound.play();
+				pPass[1] = 1;
+				document.getElementById("1").style.backgroundColor = "#0000ff";
+				document.getElementById("1").style.boxShadow = "0 0 16px 0 rgba(0, 0, 255, 0.5)";
+			}
+			else if(pPass[1] === 1){
+				offSound.play();
+				pPass[1] = 0;
+				document.getElementById("1").style.backgroundColor = "";
+				document.getElementById("1").style.boxShadow = "";
+			};
+		}
+		else if(event.code === "Digit3"){
+			if(pPass[2] === 0){
+				onSound.play();
+				pPass[2] = 1;
+				document.getElementById("2").style.backgroundColor = "#0000ff";
+				document.getElementById("2").style.boxShadow = "0 0 16px 0 rgba(0, 0, 255, 0.5)";
+			}
+			else if(pPass[2] === 1){
+				offSound.play();
+				pPass[2] = 0;
+				document.getElementById("2").style.backgroundColor = "";
+				document.getElementById("2").style.boxShadow = "";
+			};
+		}
+		else if(event.code === "Digit4"){
+			if(pPass[3] === 0){
+				onSound.play();
+				pPass[3] = 1;
+				document.getElementById("3").style.backgroundColor = "#0000ff";
+				document.getElementById("3").style.boxShadow = "0 0 16px 0 rgba(0, 0, 255, 0.5)";
+			}
+			else if(pPass[3] === 1){
+				offSound.play();
+				pPass[3] = 0;
+				document.getElementById("3").style.backgroundColor = "";
+				document.getElementById("3").style.boxShadow = "";
+			};
+		};
 	};
 };
